@@ -1,13 +1,12 @@
 package no.ntnu.idata2304.group11;
 
 /**
- * Hello world!
- *
+ * Class starts the main application.
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+public class App {
+
+    public static void main(String[] args) {
+        Interface interface = new Interface();
     }
+
 }
