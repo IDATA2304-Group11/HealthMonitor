@@ -6,7 +6,8 @@ package no.ntnu.idata2304.group11;
 public class App {
 
     public static void main(String[] args) {
-        Interface interface = new Interface();
+        UI ui = new UI();
+        ui.start();
     }
 
 }

@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * Class represents the text-based user interface.
  */
-public class Interface {
+public class UI {
 
   private final Scanner scanner;
   private static final int SEE_STATISTICS = 1;
@@ -17,7 +17,7 @@ public class Interface {
   /**
    * Create an object of Interface.
    */
-  public Interface() {
+  public UI() {
     this.scanner = new Scanner(System.in);
   }
 
