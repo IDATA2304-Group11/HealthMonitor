@@ -1,7 +1,7 @@
-package no.ntnu.idata2304.group11;
+package no.ntnu.idata2304.group11.ui;
 
-import static no.ntnu.idata2304.group11.Appearance.ANSI_GREEN;
-import static no.ntnu.idata2304.group11.Appearance.ANSI_YELLOW;
+import static no.ntnu.idata2304.group11.ui.Appearance.ANSI_GREEN;
+import static no.ntnu.idata2304.group11.ui.Appearance.ANSI_YELLOW;
 import java.util.Scanner;
 
 /**
