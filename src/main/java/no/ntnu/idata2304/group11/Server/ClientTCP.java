@@ -1,4 +1,4 @@
-package no.ntnu.idata2304.group11;
+package no.ntnu.idata2304.group11.Server;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
