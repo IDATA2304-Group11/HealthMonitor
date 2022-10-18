@@ -1,0 +1,29 @@
+#root{
+    text-align: center;
+    margin-top: 50px;
+}
+
+#secondroot{
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#employeeDetails{
+    margin-left: 177px;
+    margin-top: 20px;
+    font-size: 30px;
+
+}
+
+#patienttable{
+    margin-left: 177px;
+    box-shadow: 0px 10px 30px 5px rgb(0,0,0,.15);
+    border-color: black;
+}
+
+#tabletitle{
+    margin-left: 177px;
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
