@@ -1,4 +1,4 @@
-package no.ntnu.idata2304.group11.Server;
+package no.ntnu.idata2304.group11.Client;
 
 import org.eclipse.paho.client.mqttv3.IMqttClient;
 import org.eclipse.paho.client.mqttv3.MqttClient;

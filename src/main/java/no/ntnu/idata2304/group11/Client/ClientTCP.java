@@ -1,4 +1,4 @@
-package no.ntnu.idata2304.group11.Server;
+package no.ntnu.idata2304.group11.Client;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -37,6 +37,7 @@ public class ClientTCP {
         //keeps the connection running until DISCONNECT is written and run in the terminal.
         while (!line.equals("DISCONNECT")) {
             try{
+
                 line = this.input.readLine();
                 this.output.println(line);
             }

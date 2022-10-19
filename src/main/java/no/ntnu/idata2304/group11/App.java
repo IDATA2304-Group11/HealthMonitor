@@ -1,5 +1,6 @@
 package no.ntnu.idata2304.group11;
 
+import no.ntnu.idata2304.group11.Client.ClientTCP;
 import no.ntnu.idata2304.group11.ui.UI;
 
 /**
@@ -8,8 +9,10 @@ import no.ntnu.idata2304.group11.ui.UI;
 public class App {
 
     public static void main(String[] args) {
-UI ui = new UI();
-ui.start();
+        //UI ui = new UI();
+        //ui.start();
+        ClientTCP client = new ClientTCP("1.241.152.12", 1883);
+        
     }
 
 }
