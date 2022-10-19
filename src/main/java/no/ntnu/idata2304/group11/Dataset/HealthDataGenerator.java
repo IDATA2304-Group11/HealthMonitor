@@ -6,7 +6,7 @@ package no.ntnu.idata2304.group11.Dataset;
  * @version 16/10/22
  * @author Edvardsn
  */
-public interface DataGenerator {
+public interface HealthDataGenerator {
 
     /**
      * Generates a dataset which represents data gathered for each hour in a day
