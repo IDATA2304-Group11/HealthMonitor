@@ -21,7 +21,6 @@
         <ul>
             <li><a href="dashboard.html"><i class="fa-sharp fa-solid fa-house"></i>Dashboard</a></li>
             <li><a href="#"><i class="fa-sharp fa-solid fa-user"></i>Patients</a></li>
-            <li><a href="#"><i class="fa-sharp fa-solid fa-chart-simple"></i>Graphs</a></li>
         </ul>
     </div>
 
@@ -38,10 +37,17 @@
             <img src="logo.png" class="center">
         </div>
     </div>
+
+    <div class="patientSearch">   
+        <form action="">
+            <input class="searchBar" type="text" placeholder="patient search">
+            <button  class="submitButton" type="submit">search</button>
+        </form>
+    </div>
     
     <!--PATIENT TABLE-->
     <div class="tablediv">
-        <table class="content-table" bgcolor="lightblue" height="400">
+        <table class="content-table" bgcolor="lightblue" height="auto">
             <thead>
             <tr>
                 <th width="120px">PatientID</th>
@@ -49,6 +55,7 @@
                 <th width="50px">Age</th>
                 <th width="230px">Diagnosis</th>
                 <th width="100px">Status</th>
+                <th width="100px">Journal</th>
             </tr>
             </thead>
             <tbody>
@@ -58,13 +65,15 @@
                 <td>23</td>
                 <td>Degenerate</td>
                 <td><span style="color: green;"> <b>Normal</b></span></td></td>
+                <td><a href><i>See journal</i></a></td>
             </tr>
-            <tr class="first-row">
+            <tr>
                 <td>123332</td>
                 <td>Jørgen Finsveen</td>
                 <td>21</td>
                 <td>ADHD</td>
                 <td><span style="color: green;"> <b>Normal</b></span></td></td>
+                <td><a href><i>See journal</i></a></td>
             </tr>
             <tr>
                 <td>956992</td>
@@ -72,18 +81,62 @@
                 <td>23</td>
                 <td>Obesity</td>
                 <td><span style="color: red;"> <b>High</b></span></td></td>
+                <td><a href><i>See journal</i></a></td>
             </tr>
-            <tr class="second-row">
+            <tr>
                 <td>488281</td>
                 <td>Ole-Kristian Dvergsdal</td>
                 <td>23</td>
                 <td>Nynorsk</td>
                 <td><span style="color: orange;"> <b>Moderate</b></span></td></td>
+                <td><a href><i>See journal</i></a></td>
+            </tr>
+            <tr>
+                <td>666666</td>
+                <td>Ola Normann</td>
+                <td>23</td>
+                <td>E11</td>
+                <td><span style="color: red;"> <b>High</b></span></td></td>
+                <td><a href><i>See journal</i></a></td>
+            </tr>
+            <tr>
+                <td>123456</td>
+                <td>Ola Normann</td>
+                <td>50</td>
+                <td>E1</td>
+                <td><span style="color: green;"> <b>Normal</b></span></td></td>
+                <td><a href><i>See journal</i></a></td>
+            </tr>
+            <tr>
+                <td>123456</td>
+                <td>Ola Normann</td>
+                <td>50</td>
+                <td>E1</td>
+                <td><span style="color: green;"> <b>Normal</b></span></td></td>
+                <td><a href><i>See journal</i></a></td>
+            </tr>
+            <tr>
+                <td>123456</td>
+                <td>Ola Normann</td>
+                <td>50</td>
+                <td>E1</td>
+                <td><span style="color: green;"> <b>Normal</b></span></td></td>
+                <td><a href><i>See journal</i></a></td>
+            </tr>
+            <tr>
+                <td>123456</td>
+                <td>Ola Normann</td>
+                <td>50</td>
+                <td>E1</td>
+                <td><span style="color: green;"> <b>Normal</b></span></td></td>
+                <td><a href><i>See journal</i></a></td>
             </tr>
             </tbody>
         </table>
-
     </div>
+
+
+
 
 
 </body>
