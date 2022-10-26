@@ -147,6 +147,8 @@ def generateBPDataSeconds(seconds):
     time_interval = np.arange(1, seconds, 1)
     amplitude = fluctuationRange / 2
 
+    print(2* np.pi / 8)
+
     BPdata = [patient.name + "," + getGender(patient.gender) + "," + str(patient.age)]
 
     for t in time_interval:
@@ -154,13 +156,14 @@ def generateBPDataSeconds(seconds):
 
         coefficient = stabilizeAmplitude(amplitude, fluctuationRange)
 
-        amplitude = coefficient * random.randrange(3, fluctuationRange)
+        amplitude = coefficient * random.randrange(1, fluctuationRange)
 
         dataValue = customizableSineWave(t, amplitude, frequency, equilibrium_line)
 
         roundedDataValue = round(dataValue, 2)
 
-        BPdata.append([roundedDataValue])
+        BPdata.append(roundedDataValue)
+
 
     df = pd.DataFrame(BPdata)
 
