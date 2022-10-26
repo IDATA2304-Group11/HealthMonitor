@@ -1,4 +1,4 @@
-package no.ntnu.idata2304.group11.ui;
+package no.ntnu.idata2304.group11.app;
 
 /**
  * Class represents the appearance of the user interface.

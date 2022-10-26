@@ -1,4 +1,4 @@
-package no.ntnu.idata2304.group11.Dataset;
+package no.ntnu.idata2304.group11.data;
 
 import java.util.Random;
 

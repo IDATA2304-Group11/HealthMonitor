@@ -1,4 +1,4 @@
-package no.ntnu.idata2304.group11.Dataset;
+package no.ntnu.idata2304.group11.data;
 
 /**
  * This interface contains all available types of datasets to be generated
