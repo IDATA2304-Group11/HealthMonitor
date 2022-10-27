@@ -1,34 +1,21 @@
-# Generates a Patient
-
-# Boolean with a 1/5 chance of an event happening where increased blood pressure over 2 minutes at a random
-# time during the day
-
-# BP with a mean value and variance of standard deviation of 13
-
-# When an event occurs the BP spikes and uses a temporary mean value 20-30 higher than normal for the next
-# 120 iterations
-
 # Template based on Data from "National Health and Nutrition Examination Survey 2007-2010. JAMA. 2011;305(19):1971-1979"
-
-# chance of having a increase during a positive phase
 
 import random
 import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
 import os
 from faker import Faker
 
-"""
-This class represents a Patient with random but realistic gender,age, heart rate and blood pressure fluctuation
-"""
-
 # Fake Norwegian name generator
 fake = Faker("no_NO")
-# The average standard deviation of Blood pressure in adults
-STANDARD_DEVIATION_BP = 13
 # The average fluctuation percentage in BP in adult patients
 FLUCTUATION_PERCENTAGE = 0.20
+
+"""
+This class represents a Patient with random but realistic gender,age, heart rate and blood pressure fluctuation
+
+@author Edvardsn
+@version 27/10/22
+"""
 
 
 class Patient:
@@ -45,7 +32,11 @@ class Patient:
     fluctuationRange = int
 
 
-# Generates a psuedorandom elderly person with its respective attributes
+"""
+Generates a psuedorandom elderly person with its respective attributes
+"""
+
+
 def generatePatient():
     name = fake.name_male()
     gender = random.randrange(0, 2)
@@ -55,7 +46,11 @@ def generatePatient():
     return Patient(name, gender, age, fluctuationRange)
 
 
-# Fetches the mean value of a given age and gender of a patient
+"""
+Fetches the mean value of a given age and gender of a patient
+"""
+
+
 def fetchMeanValue(age, gender):
     if gender == 0:
         return fetchMeanValuesMan(age)
@@ -63,8 +58,12 @@ def fetchMeanValue(age, gender):
         return fetchMeanValuesFemale(age)
 
 
-# Returns the male mean value in blood pressure of a given age
-# Values are extracted from "National Health and Nutrition Examination Survey 2007-2010. JAMA. 2011;305(19):1971-1979"
+"""
+Returns the male mean value in blood pressure of a given age
+Values are extracted from "National Health and Nutrition Examination Survey 2007-2010. JAMA. 2011;305(19):1971-1979"
+"""
+
+
 def fetchMeanValuesMan(age):
     if age < 64:
         return 105
@@ -78,8 +77,12 @@ def fetchMeanValuesMan(age):
         return 145
 
 
-# Returns the female mean value in systolic and diastolic blood pressure of a given age
-# Values are extracted from "National Health and Nutrition Examination Survey 2007-2010. JAMA. 2011;305(19):1971-1979"
+"""
+Returns the female mean value in systolic and diastolic blood pressure of a given age
+Values are extracted from "National Health and Nutrition Examination Survey 2007-2010. JAMA. 2011;305(19):1971-1979"
+"""
+
+
 def fetchMeanValuesFemale(age):
     if age < 64:
         return 105
@@ -91,9 +94,9 @@ def fetchMeanValuesFemale(age):
         return 120
 
 
-# Returns a random integer in the range 0 - 1, a bit.
-def getRandomBit():
-    return random.randrange(0, 1)
+""" 
+Returns the gender of a patient from the binary representation
+"""
 
 
 def getGender(genderValue):
@@ -103,19 +106,20 @@ def getGender(genderValue):
         return "Female"
 
 
-# Converts a given dataframe into a csv file
-def convert_dataframe_to_csv(df, fileName):
-    csvFile = df.to_csv(fileName, sep=";", index=False)
-    filePath = "/Python/Data/" + fileName
-    path = os.path.join(filePath, fileName)
+"""
+Creates a sine wave that can be easily modified
+"""
 
 
-# Creates a sine value with given parameters
 def customizableSineWave(variable, amplitude, frequency, equilibrium):
     return amplitude * np.sin(frequency * variable) + equilibrium
 
 
-# Returns a coefficient sign value where the amplitude is directed towards the middle of the amplitude rannge
+"""
+Returns a coefficient sign value where the amplitude is directed towards the middle of the amplitude range provided
+"""
+
+
 def stabilizeAmplitude(amplitude, amplitudeRange):
     coefficientSign = 1
 
@@ -138,7 +142,14 @@ def stabilizeAmplitude(amplitude, amplitudeRange):
     return coefficientSign
 
 
-# Generates bloodPressure for a given time interval
+"""
+This method generates an array realistic syntetic blood pressure data along with generated personal information
+measured once per second.
+
+Array Format: ["Name, Gender, Age", 231, 213, ....]
+"""
+
+
 def generateBPDataSeconds(seconds):
     patient = generatePatient()
 
@@ -154,25 +165,12 @@ def generateBPDataSeconds(seconds):
 
         coefficient = stabilizeAmplitude(amplitude, fluctuationRange)
 
-        amplitude = coefficient * random.randrange(3, fluctuationRange)
+        amplitude = coefficient * random.randrange(1, fluctuationRange)
 
         dataValue = customizableSineWave(t, amplitude, frequency, equilibrium_line)
 
         roundedDataValue = round(dataValue, 2)
 
-        BPdata.append([roundedDataValue])
-
-    df = pd.DataFrame(BPdata)
-
-    fileName = patient.name + ".csv"
-
-    convert_dataframe_to_csv(df, fileName)
-
-    print(BPdata)
-    plt.plot(time_interval, BPdata[1:])
-    plt.show()
+        BPdata.append(roundedDataValue)
 
     return BPdata
-
-
-generateBPDataSeconds(60)
