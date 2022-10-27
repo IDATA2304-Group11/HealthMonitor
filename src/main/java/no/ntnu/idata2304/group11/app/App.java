@@ -2,7 +2,7 @@ package no.ntnu.idata2304.group11.app;
 
 import org.eclipse.paho.client.mqttv3.MqttException;
 
-import no.ntnu.idata2304.group11.client.Mqtt;
+import no.ntnu.idata2304.group11.client.mqtt.Mqtt;
 
 import java.io.IOException;
 
