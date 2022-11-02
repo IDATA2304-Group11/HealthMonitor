@@ -4,9 +4,6 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import java.io.*;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
 import java.net.SocketException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -39,11 +36,6 @@ public class FtpClient {
      * @throws IOException error if you can't connect to the server.
      */
     public FtpClient() throws IOException {
-
-        InetAddress addr = InetAddress.getByName("ftpcluster.loopia.se");
-        int port = 80;
-        SocketAddress socketAddress = new InetSocketAddress(addr,port);
-        //this.serverAddress = socketAddress;
 
         //Setts up ftp for use.
         this.ftp.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
