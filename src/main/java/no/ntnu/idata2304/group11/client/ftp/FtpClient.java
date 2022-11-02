@@ -4,6 +4,10 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import java.io.*;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
+import java.net.SocketException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -16,37 +20,82 @@ import java.util.Collection;
 public class FtpClient {
 
     //The ftp client
-    private FTPClient ftp;
+    private FTPClient ftp = new FTPClient();
+
+    //Socket info
+    private String serverAddress = "ftpcluster.loopia.se";
+
+    //Logg on info
+    private String user = "finsveen.dev";
+    private String password = "NtnuGruppe11";
+
+
+
+
+
 
     /**
      * Constructor of a ftp client.
-     * @param serverIp ip of the server you want to connect to.
-     * @param port port number of the server you want to connect to.
-     * @param user username you want to log inn with.
-     * @param password password you want to log inn with.
      * @throws IOException error if you can't connect to the server.
      */
-    public FtpClient(String serverIp, int port, String user, String password) throws IOException {
+    public FtpClient() throws IOException {
+
+        InetAddress addr = InetAddress.getByName("ftpcluster.loopia.se");
+        int port = 80;
+        SocketAddress socketAddress = new InetSocketAddress(addr,port);
+        //this.serverAddress = socketAddress;
 
         //Setts up ftp for use.
-        this.ftp = new FTPClient();
         this.ftp.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
 
         //Sets up different settings for the ftp client
         this.ftp.setConnectTimeout(10);
 
-
-        //Connecet to server and checks if it connected to the server
-        this.ftp.connect(serverIp,port);
-        int replay = ftp.getReplyCode();
-        if (!FTPReply.isPositiveCompletion(replay)) {
-            this.ftp.disconnect();
-            throw new IOException("DID NOT CONNECT TO FTP SERVER. Exception error.");
-        }
+        //Try connect to server
+        chechConnectionToFTPServer();
 
         //login wiht username and password
-        this.ftp.login(user, password);
+        this.ftp.login(this.user, this.password);
     }
+
+
+    private void chechConnectionToFTPServer() {
+        try {
+            int reply;
+
+            //Connect attempt to the FTP server
+            this.ftp.connect(this.serverAddress);
+            System.out.println("Connected tp " + this.serverAddress + ".");
+            System.out.println(this.ftp.getReplyString());
+
+            //Check if connection attempt reply code is successful.
+            //If it is note client disconnects.
+            reply = this.ftp.getReplyCode();
+            if(!FTPReply.isPositiveCompletion(reply)) {
+                this.ftp.disconnect();
+                System.err.println("FTP server refused connection.");
+                System.exit(1);
+            }
+        }
+        catch (SocketException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            if((this.ftp.isConnected())) {
+                try {
+                    this.ftp.disconnect();
+                } catch (IOException f) {
+                    f.printStackTrace();
+                }
+            }
+            System.err.println("Could not connect to server.");
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+
+    //FUNCTIONS
 
     /**
      * Disconnect from the ftp.
@@ -54,14 +103,21 @@ public class FtpClient {
      */
     public void disconnect() throws IOException {
         this.ftp.disconnect();
+        if(this.ftp.isConnected()) {
+            System.out.println("Did not disconnect.");
+        }
+        else {
+            System.out.println("Disconnected from the FTP server " + this.serverAddress + ".");
+        }
     }
+
 
     //TODO check if i want to trasnform it to Strings.
     /**
      * List the files.
-     * @param path
-     * @return
-     * @throws IOException
+     * @param path //TODO this
+     * @return // TODO this
+     * @throws IOException //TODO this
      */
     public Collection<String> listFlies(String path) throws IOException {
         FTPFile[] files = this.ftp.listFiles(path);
@@ -84,7 +140,8 @@ public class FtpClient {
      * @param destination where you want to download the file to
      * @throws IOException
      */
-    public void download(String source, String destination) throws IOException {
+    public void download(String source, String destination)
+        throws IOException {
         FileOutputStream out = new FileOutputStream(destination);
         this.ftp.retrieveFile(source,out);
     }
