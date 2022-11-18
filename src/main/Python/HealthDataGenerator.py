@@ -2,11 +2,7 @@
 
 import random
 import numpy as np
-import os
-from faker import Faker
 
-# Fake Norwegian name generator
-fake = Faker("no_NO")
 # The average fluctuation percentage in BP in adult patients
 FLUCTUATION_PERCENTAGE = 0.20
 
@@ -14,22 +10,23 @@ FLUCTUATION_PERCENTAGE = 0.20
 This class represents a Patient with random but realistic gender,age, heart rate and blood pressure fluctuation
 
 @author Edvardsn
-@version 27/10/22
+@version 18/11/22
 """
 
 
 class Patient:
 
     def __init__(self, name, gender, age, fluctuationRange):
-        self.name = name
         self.gender = gender
         self.age = age
         self.fluctuation = fluctuationRange
+    
 
     name = ""
     gender = int
     age = int
     fluctuationRange = int
+  
 
 
 """
@@ -38,12 +35,12 @@ Generates a psuedorandom elderly person with its respective attributes
 
 
 def generatePatient():
-    name = fake.name_male()
     gender = random.randrange(0, 2)
     age = random.randrange(60, 90)
     fluctuationRange = round(FLUCTUATION_PERCENTAGE * fetchMeanValue(age, gender))
+   
 
-    return Patient(name, gender, age, fluctuationRange)
+    return Patient(gender, age, fluctuationRange)
 
 
 """
@@ -109,8 +106,6 @@ def getGender(genderValue):
 """
 Creates a sine wave that can be easily modified
 """
-
-
 def customizableSineWave(variable, amplitude, frequency, equilibrium):
     return amplitude * np.sin(frequency * variable) + equilibrium
 
@@ -118,7 +113,6 @@ def customizableSineWave(variable, amplitude, frequency, equilibrium):
 """
 Returns a coefficient sign value where the amplitude is directed towards the middle of the amplitude range provided
 """
-
 
 def stabilizeAmplitude(amplitude, amplitudeRange):
     coefficientSign = 1
@@ -149,7 +143,6 @@ measured once per second.
 Array Format: ["Name, Gender, Age", 231, 213, ....]
 """
 
-
 def generateBPDataSeconds(seconds):
     patient = generatePatient()
 
@@ -158,8 +151,9 @@ def generateBPDataSeconds(seconds):
     time_interval = np.arange(1, seconds, 1)
     amplitude = fluctuationRange / 2
 
-    BPdata = [patient.name + "," + getGender(patient.gender) + "," + str(patient.age)]
-
+   # BPdata = [patient.name + "," + getGender(patient.gender) + "," + str(patient.age)]
+    BPdata = []
+   
     for t in time_interval:
         frequency = random.uniform(6, 8)
 
