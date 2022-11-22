@@ -1,35 +1,40 @@
 import HealthDataGenerator
 import socket
-import time
 
-port = 9000 # Arbituary port
-address = ('10.24.90.45',port)
+port = 9000 
+address = ('172.20.10.2',port)
 
-packet = "2022-11-22 12:17:42;145;88;75;ABCD-EDFG-FJ78"
-
-def sendDataInTimeframe(running_time):
-    
-    while running_time > 0:
-        
-    
-        # Send data
-        
-        running_time -= 1
-        time.sleep(1)
-    
-    
-    
-    
-    
-
-
-
+""" 
+Creates a socket and connects to specified adress 
+"""
 def connect():
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     s.connect(address)
     return s
 
+"""
+Sends medicaldata which are extracted from a datagenerator
+"""
+def sendMedicalData(duration):
+    
+    print("Trying to establish connection")
+    
+    connection = connect()
+    
+    print("Connection established")
+    
+    AllPatientData = HealthDataGenerator.generateRegisteredSensorData(duration)
+        
+    for data in AllPatientData:
+        
+        packet = data
+        
+        connection.send(packet.encode("utf-8"))
+        
+                       
+               
+sendMedicalData(5)        
+        
+      
 
-melding = connect()
 
-melding.send(packet.encode("utf-8"))
