@@ -14,16 +14,17 @@ This class represents a Patient with random but realistic gender,age, heart rate
 """
 class Patient:
 
-    def __init__(self, gender, age, SystolicfluctuationRange, DiastolicfluctuationRange):
+    def __init__(self, gender, age, Systolicfluctuation, Diastolicfluctuation):
         self.gender = gender
         self.age = age
-        self.SystolicfluctuationRange = SystolicfluctuationRange
-        self.DiastolicfluctuationRange = DiastolicfluctuationRange
+        self.Systolicfluctuation = Systolicfluctuation
+        self.Diastolicfluctuation = Diastolicfluctuation
     
     gender = int
     age = int
-    SystolicfluctuationRange = int
-    DiastolicfluctuationRange = int
+    Systolicfluctuation = int
+    Diastolicfluctuation = int
+    heartratefluctuation = int
 
   
 """
@@ -192,7 +193,7 @@ def generateTimeframeData(seconds):
     
     counter = 1
     
-    Timedata = [str(currentTime)[11:19]]
+    Timedata = [str(currentTime)]
     
     while counter <= seconds:
             
@@ -200,11 +201,11 @@ def generateTimeframeData(seconds):
         
         newTime = str(currentTime.replace(second= newSecond, minute= currentMinute))
         
-        Timedata.append(newTime[11:19])
+        Timedata.append(newTime)
         
         if newSecond == 59:
             currentMinute += 1
-       
+            
             
         counter += 1
         
@@ -220,9 +221,9 @@ def generateRegisteredSensorData(seconds):
     REGISTERED_SENSOR_SERIALNUMBERS = ["ABCD-EFGH-AC78","ABCD-EFGH-AC79","ABCD-EFGH-AC80","ABCD-EFGH-AC81","ABCD-EFGH-AC82"]
 
     # A dictonary of all current patients
-    REGISTERED_PATIENTS =  {"ABCD-EFGH-AC78": Patient(0,72,155,95)
+    REGISTERED_PATIENTS =  {"ABCD-EFGH-AC78": Patient(0,72,155,)
                                     ,"ABCD-EFGH-AC79": Patient(1,83,7,5) 
-                                    ,"ABCD-EFGH-AC80": Patient(1,66,3,5)
+                                    ,"ABCD-EFGH-AC80": Patient(1,66,15,10)
                                     ,"ABCD-EFGH-AC81": Patient(0,88,6,2)
                                     ,"ABCD-EFGH-AC82": Patient(0,71,4,6)}
     
@@ -245,9 +246,6 @@ def generateRegisteredSensorData(seconds):
     return TotalPatientData
         
 
-#print(generateDiastolicData(20, Patient(0,88,180,115)))
-
-print(generateRegisteredSensorData(20))        
-        
+    
 
 
