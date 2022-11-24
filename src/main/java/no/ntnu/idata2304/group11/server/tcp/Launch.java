@@ -1,4 +1,4 @@
-package no.ntnu.idata2304.group11.client.tcp;
+package no.ntnu.idata2304.group11.server.tcp;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import java.io.IOException;
  * @version  10-11-2022
  * @author   jorgenfinsveen
  */
-public class Main {
+public class Launch {
 
     /**
      * Creates a receiver-instance.

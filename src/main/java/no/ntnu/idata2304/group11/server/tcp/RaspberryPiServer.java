@@ -1,8 +1,10 @@
-package no.ntnu.idata2304.group11.client.tcp;
+package no.ntnu.idata2304.group11.server.tcp;
 
 import java.io.*;  
 import java.net.*;
-import java.nio.charset.StandardCharsets;  
+import java.nio.charset.StandardCharsets;
+
+import no.ntnu.idata2304.group11.app.Coordinator;  
 
 
 /**
@@ -18,7 +20,7 @@ import java.nio.charset.StandardCharsets;
 public class RaspberryPiServer {
     
     /** Port-number which the server is listening on. */
-    private static final int PORT = 8888;
+    private static final int PORT = 9235;
     /** Constraint-variable for server activity time. */
     private boolean listening = true;
 
@@ -45,13 +47,14 @@ public class RaspberryPiServer {
 
             /* Receive data from a client. */
             socket = serverSocket.accept();
+            System.out.println(socket.getInetAddress() + ":" + socket.getPort());
             /* Extract the DataInputStream from the socket. */
             ds = new DataInputStream(socket.getInputStream());
             /* Converts the DataInputStream to a String. */
             message = new String(ds.readAllBytes(), StandardCharsets.UTF_8);
 
-            /* Print the received message. */
-            printMessage(message);
+            /* Send message to the coordinator. */
+            Coordinator.receive(message);
 
             /* Manage server timeout condition. */
             counter++;
@@ -60,16 +63,5 @@ public class RaspberryPiServer {
             }
         }
         serverSocket.close();
-    }
-
-
-
-    /**
-     * Print a message.
-     * 
-     * @param message to print.
-     */
-    private void printMessage(String message) {
-        System.out.println("  -  " + message);
     }
 }
