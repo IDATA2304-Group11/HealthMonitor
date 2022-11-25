@@ -1,4 +1,4 @@
-package no.ntnu.idata2304.group11.backend;
+package no.ntnu.idata2304.group11.database;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -6,7 +6,9 @@ import java.util.Date;
 
 /**
  * With this class, you can connect to the db server.
- * The dbserver is finsveen_dev.
+ * The database which is connected to is finsveen_dev.
+ * Makes it possible for the program to do queries and
+ * manipulate the data stored in the database.
  * 
  * @author  Ole Kristian Dvergsdal 
  * @author  Jørgen Finsveen 
@@ -19,6 +21,7 @@ public class DataBaseClient {
     private static final String USERNAME = "backend@f328341";
     private static final String PASSWORD = "NtnuBckGroup11!#?";
 
+    /** The session which is used for communicating with the db-server. */
     private static Connection session;
 
 

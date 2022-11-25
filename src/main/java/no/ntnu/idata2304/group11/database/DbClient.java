@@ -1,4 +1,4 @@
-package no.ntnu.idata2304.group11.backend;
+package no.ntnu.idata2304.group11.database;
 
 import java.sql.*;
 

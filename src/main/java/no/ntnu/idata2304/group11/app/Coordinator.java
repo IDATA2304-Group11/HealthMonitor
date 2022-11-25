@@ -6,7 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import no.ntnu.idata2304.group11.backend.DataBaseClient;
+import no.ntnu.idata2304.group11.database.DataBaseClient;
 import no.ntnu.idata2304.group11.json.JsonHandler;
 
 /**
