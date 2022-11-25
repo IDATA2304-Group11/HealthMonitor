@@ -1,4 +1,4 @@
-package no.ntnu.idata2304.group11.server.tcp;
+package no.ntnu.idata2304.group11.server;
 
 import java.io.IOException;
 

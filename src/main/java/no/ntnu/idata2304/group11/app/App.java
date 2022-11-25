@@ -3,8 +3,7 @@ package no.ntnu.idata2304.group11.app;
 import no.ntnu.idata2304.group11.client.ftp.FtpClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
-import no.ntnu.idata2304.group11.client.mqtt.Mqtt;
-import no.ntnu.idata2304.group11.server.tcp.Launch;
+import no.ntnu.idata2304.group11.server.Launch;
 
 import java.io.IOException;
 
@@ -19,5 +18,4 @@ public class App {
         FtpClient ftpClient = new FtpClient();
         ftpClient.disconnect();
     }
-
 }

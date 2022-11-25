@@ -2,20 +2,18 @@ package no.ntnu.idata2304.group11.backend;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * With this class, you can connect to the db server.
  * The dbserver is finsveen_dev.
  * 
- * @author 
- * Ole Kristian Dvergsdal 
- * @author
- * Jørgen Finsveen 
+ * @author  Ole Kristian Dvergsdal 
+ * @author  Jørgen Finsveen 
  * @version 2.0
- * @since 18-11-2022
+ * @since   18-11-2022
  */
 public class DataBaseClient {
-    
     
     private static final String HOSTNAME = "jdbc:mariadb://mysql579.loopia.se/finsveen_dev";
     private static final String USERNAME = "backend@f328341";
@@ -131,7 +129,7 @@ public class DataBaseClient {
                  WHERE PID =  
                 """ + "'" + pid + "';");
         ) {
-            ResultSet resultSet = statement.executeQuery();
+            statement.executeQuery();
         }
         disconnect();
     }
@@ -164,7 +162,7 @@ public class DataBaseClient {
                 WHERE PID =        
                 """ + "'" + pid + "' " +
                 """
-                ORDER BY Time ASC LIMIT
+                ORDER BY Time DESC LIMIT
                 """ + "" + amount + ";"
             )
         ) {
@@ -212,9 +210,67 @@ public class DataBaseClient {
                 """ + pid + "','" + time + "','" + dia + "','" + sys + "','" + hr + "');"
             )
         ) {
-            ResultSet resultSet = statement.executeQuery();
+            statement.executeQuery();
         } 
 
         disconnect();                                    
+    }
+
+
+    /**
+     * Get the gender of a patient from the database using the sensor id.
+     * 
+     * @param sensor sensor id assigned to a patient.
+     * @return the gender of the patient.
+     * @throws SQLException
+     *      if database server connection/disconnection fails.
+     */
+    public static String getGender(String sensor) throws SQLException {
+        connect();
+        String result = "";
+        try (
+            PreparedStatement statement = session.prepareStatement(
+                """
+                SELECT gender
+                FROM Patient
+                WHERE Sensor =
+                """ + "'" + sensor + "';");
+        ) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                result = resultSet.getString("gender");
+            }
+        }
+        disconnect();
+        return result;
+    }
+
+
+    /**
+     * Get the age of a patient from the database using the sensor id.
+     * 
+     * @param sensor sensor id assigned to a patient.
+     * @return the age of the patient.
+     * @throws SQLException
+     *      if database server connection/disconnection fails.
+     */
+    public static Date getAge(String sensor) throws SQLException {
+        connect();
+        Date date = new Date();
+        try (
+            PreparedStatement statement = session.prepareStatement(
+                """
+                SELECT DateOfBirth
+                FROM Patient
+                WHERE Sensor =
+                """ + "'" + sensor + "';");
+        ) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                date = (resultSet.getDate("DateOfBirth"));
+            }
+        }
+        disconnect();
+        return date;
     }
 }

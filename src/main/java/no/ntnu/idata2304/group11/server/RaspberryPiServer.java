@@ -1,4 +1,4 @@
-package no.ntnu.idata2304.group11.server.tcp;
+package no.ntnu.idata2304.group11.server;
 
 import java.io.*;  
 import java.net.*;
@@ -39,7 +39,7 @@ public class RaspberryPiServer {
         DataInputStream ds;
         String message;
         int counter = 0;
-        int limit = 10;
+        int limit = 10000;
         ServerSocket serverSocket = new ServerSocket(PORT);
 
 
