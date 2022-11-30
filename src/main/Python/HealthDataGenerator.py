@@ -144,7 +144,7 @@ def generateHeartrateData(seconds, patient):
 
         dataValue = customizableSineWave(t, amplitude, frequency, equilibrium_line)
 
-        roundedDataValue = round(dataValue, 2)
+        roundedDataValue = round(dataValue)
 
         HR_data.append(roundedDataValue)
 
@@ -174,7 +174,7 @@ def generateSystolicData(seconds, patient):
 
         dataValue = customizableSineWave(t, amplitude, frequency, equilibrium_line)
 
-        roundedDataValue = round(dataValue, 2)
+        roundedDataValue = round(dataValue)
 
         Sysdata.append(roundedDataValue)
 
@@ -203,7 +203,7 @@ def generateDiastolicData(seconds, patient):
 
         dataValue = customizableSineWave(t, amplitude, frequency, equilibrium_line)
 
-        roundedDataValue = round(dataValue, 2)
+        roundedDataValue = round(dataValue)
 
         Diadata.append(roundedDataValue)
 
