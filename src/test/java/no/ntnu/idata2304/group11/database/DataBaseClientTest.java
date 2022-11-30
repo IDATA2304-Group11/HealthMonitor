@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.sql.SQLException;
 import org.junit.Test;
 
-import no.ntnu.idata2304.group11.database.DataBaseClient;
-
 /**
  * JUnit-testing for the DataBaseClient.
  * 

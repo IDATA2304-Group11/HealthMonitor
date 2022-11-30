@@ -142,7 +142,7 @@
         "age_max": 65,
         "male": {
             "sys": 131,
-            "dia": 87,
+            "dia": 80,
             "hr_min": 57,
             "hr_max": 81
         },
@@ -158,8 +158,8 @@
         "age_min": 66,
         "age_max": 70,
         "male": {
-            "sys": 139,
-            "dia": 89,
+            "sys": 140,
+            "dia": 90,
             "hr_min": 57,
             "hr_max": 81
         },
@@ -175,8 +175,8 @@
         "age_min": 70,
         "age_max": 75,
         "male": {
-            "sys": 140,
-            "dia": 90,
+            "sys": 155,
+            "dia": 95,
             "hr_min": 56,
             "hr_max": 79
         },
@@ -192,8 +192,8 @@
         "age_min": 76,
         "age_max": 79,
         "male": {
-            "sys": 160,
-            "dia": 100,
+            "sys": 170,
+            "dia": 105,
             "hr_min": 56,
             "hr_max": 79
         },
@@ -210,7 +210,7 @@
         "age_max": 150,
         "male": {
             "sys": 180,
-            "dia": 110,
+            "dia": 115,
             "hr_min": 56,
             "hr_max": 79
         },

@@ -104,6 +104,9 @@ public class Coordinator {
      */
     private static void identifyPatient(Measurement measure) throws SQLException {
         measure.setPid(DataBaseClient.getPID(measure.getSensor()));
+        if ("null".equals(measure.getSensor())) {
+            throw new IllegalArgumentException("Sensor not recognized: " + measure.getSensor());
+        } 
     }
 
 
@@ -182,9 +185,9 @@ public class Coordinator {
          * evaluation will be that the patients health is critical, which overwrites
          * both the stable- and the unusual status.
          */
-        if (considerAverageMeasurements(getAverage(sys), optimals[0], 10)
-            || considerAverageMeasurements(getAverage(dia), optimals[1], 10)
-            || hrAvg < optimals[2] || hrAvg > optimals[3]) {
+        if (considerAverageMeasurements(getAverage(sys), optimals[0], 15)
+            || considerAverageMeasurements(getAverage(dia), optimals[1], 15)
+            ) {
 
             result = "critical";    
         }

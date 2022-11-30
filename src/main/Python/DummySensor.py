@@ -1,8 +1,8 @@
 import HealthDataGenerator
 import socket
 
-port = 9000 
-address = ('172.20.10.2',port)
+port = 9852 
+address = ('192.168.86.44',port)
 
 """ 
 Creates a socket and connects to specified adress 

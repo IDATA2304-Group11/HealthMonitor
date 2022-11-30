@@ -235,7 +235,7 @@ def generateTimeframeData(seconds):
         
         newTime = str(currentTime.replace(second= newSecond, minute= currentMinute))
         
-        Timedata.append(newTime[0:19])
+        Timedata.append(newTime[0:17])
        
         counter += 1
         
