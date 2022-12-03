@@ -46,7 +46,7 @@ public class DataBaseClient {
      *      if disconnection fails.
      */
     private static void disconnect() throws SQLException {
-        if (session != null) {
+        if (!session.isClosed()) {
             session.close();
             session = null;
         }
@@ -62,8 +62,8 @@ public class DataBaseClient {
      *      if database server connection/disconnection fails.
      */
     public static String getStatus(int pid) throws SQLException {
-        connect();
         String result = "";
+        connect();
         try (
             PreparedStatement statement = session.prepareStatement(
             """
@@ -75,9 +75,10 @@ public class DataBaseClient {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 result = resultSet.getString("Status");
+                disconnect();
             }
         }
-        disconnect();
+        
         return result;
     }
 
@@ -91,8 +92,8 @@ public class DataBaseClient {
      *      if database server connection/disconnection fails.
      */
     public static String getPID(String sensor) throws SQLException {
-        connect();
         String result = "";
+        connect();
         try (
             PreparedStatement statement = session.prepareStatement(
                 """
@@ -105,8 +106,8 @@ public class DataBaseClient {
             while (resultSet.next()) {
                 result = resultSet.getString("PID");
             }
+            disconnect();
         }
-        disconnect();
         return result;
     }
 
@@ -120,8 +121,8 @@ public class DataBaseClient {
      *      if database server connection/disconnection fails.
      */
     public static void setStatus(String pid, String status) throws SQLException {
-        connect();
         status = "'" + status + "'";
+        connect();
         try (
             PreparedStatement statement = session.prepareStatement(
                 """
@@ -133,8 +134,8 @@ public class DataBaseClient {
                 """ + "'" + pid + "';");
         ) {
             statement.executeQuery();
+            disconnect();
         }
-        disconnect();
     }
 
 
@@ -148,7 +149,6 @@ public class DataBaseClient {
      *      if database server connection/disconnection fails.
      */
     public static ArrayList<ArrayList<String>> getMeasurements(String pid, int amount) throws SQLException {
-        connect();
 
         ArrayList<String> time = new ArrayList<>();
         ArrayList<String> sys = new ArrayList<>();
@@ -157,6 +157,7 @@ public class DataBaseClient {
 
         ArrayList<ArrayList<String>> result = new ArrayList<>();
 
+        connect();
         try (
             PreparedStatement statement = session.prepareStatement(
                 """
@@ -180,9 +181,8 @@ public class DataBaseClient {
             result.add(sys);
             result.add(dia);
             result.add(hr);
+            disconnect();
         }
-
-        disconnect();
         return result;
     }
 
@@ -214,9 +214,8 @@ public class DataBaseClient {
             )
         ) {
             statement.executeQuery();
-        } 
-
-        disconnect();                                    
+            disconnect();                 
+        }                    
     }
 
 
@@ -229,8 +228,8 @@ public class DataBaseClient {
      *      if database server connection/disconnection fails.
      */
     public static String getGender(String sensor) throws SQLException {
-        connect();
         String result = "";
+        connect();
         try (
             PreparedStatement statement = session.prepareStatement(
                 """
@@ -243,8 +242,8 @@ public class DataBaseClient {
             while (resultSet.next()) {
                 result = resultSet.getString("gender");
             }
+            disconnect();
         }
-        disconnect();
         return result;
     }
 
@@ -258,8 +257,8 @@ public class DataBaseClient {
      *      if database server connection/disconnection fails.
      */
     public static Date getAge(String sensor) throws SQLException {
-        connect();
         Date date = new Date();
+        connect();
         try (
             PreparedStatement statement = session.prepareStatement(
                 """
@@ -272,8 +271,8 @@ public class DataBaseClient {
             while (resultSet.next()) {
                 date = (resultSet.getDate("DateOfBirth"));
             }
+            disconnect();
         }
-        disconnect();
         return date;
     }
 }

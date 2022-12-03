@@ -25,14 +25,43 @@ public class RaspberryPiServer {
     private boolean listening = true;
 
 
+    /**
+     * Thread running the server receiving measurements.
+     */
+    private final Thread SERVER_THREAD = new Thread() {
+ 
+        @Override
+        public void run() { 
+            try { initConnectivity(); } 
+            catch (IOException e) { e.printStackTrace(); } 
+        }
+    };
+
+
+    private Thread getProcessThread(String data) {
+        return new Thread() {
+
+            @Override
+            public void run() {
+                Coordinator.receive(data);
+            }
+        };
+    }
+
+
+
+    public void run() {
+        SERVER_THREAD.start();
+    }
+
 
 
     /**
-     * Run server and initialize a listener on a specified port.
+     * Initialize a listener on a specified port.
      * 
      * <p>Receive data and print it to STDOUT.
      */
-    public void run() throws IOException {
+    private void initConnectivity() throws IOException {
 
         /* Variables. */
         Socket socket;
@@ -54,7 +83,14 @@ public class RaspberryPiServer {
             message = new String(ds.readAllBytes(), StandardCharsets.UTF_8);
 
             /* Send message to the coordinator. */
-            Coordinator.receive(message);
+            Thread PROCESSOR_THREAD = getProcessThread(message);
+            PROCESSOR_THREAD.start();
+            try {
+                PROCESSOR_THREAD.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
 
             /* Manage server timeout condition. */
             counter++;

@@ -58,7 +58,7 @@ public class JsonParserTest {
 
         /* Expected results for male patient. */
         assertEquals(180, male[0]);
-        assertEquals(110, male[1]);
+        assertEquals(115, male[1]);
         assertEquals(56,  male[2]);
         assertEquals(79,  male[3]);
 

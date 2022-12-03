@@ -18,7 +18,7 @@ public class JsonHandler {
     
 
     /** Path to the JSON-file. */
-    private static final String PATH = "pressure_chart.json";
+    private static final String PATH = "json/json/pressure_chart.json";
     /** Exception for error when trying to read the JSON-file. */
     private static final NullPointerException NO_FILE = 
         new NullPointerException("File not found: " + PATH);

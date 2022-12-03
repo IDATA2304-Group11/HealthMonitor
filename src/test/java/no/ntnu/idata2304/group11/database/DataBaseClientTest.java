@@ -45,7 +45,7 @@ public class DataBaseClientTest {
      */
     @Test
     public void getPIDTest() throws SQLException {
-        assertEquals("1001", DataBaseClient.getPID("E89X-2JKL-5420-GH42"));
+        assertEquals("1003", DataBaseClient.getPID("ABCD-EFGH-AC81"));
     }
 
     /**
