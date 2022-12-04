@@ -1,7 +1,5 @@
 package no.ntnu.idata2304.group11.server;
 
-import java.io.IOException;
-
 /**
  * Starting point of the backend implementation of
  * the application.
@@ -15,7 +13,7 @@ public class Launch {
     /**
      * Creates a receiver-instance.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         RaspberryPiServer server = new RaspberryPiServer();
         server.run();
     }
