@@ -3,7 +3,7 @@ import socket
 import time
 
 port = 9852 
-address = ('10.24.88.135',port)
+address = ('192.168.86.37',port)
 
 """ 
 Creates a socket and connects to specified adress 
